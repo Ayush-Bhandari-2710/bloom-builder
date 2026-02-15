@@ -1,1 +1,19 @@
 project_id = "hqrszmyxxdxvmrfaxibc"
+
+[functions.create-bouquet]
+verify_jwt = false
+
+[functions.update-bouquet]
+verify_jwt = false
+
+[functions.get-bouquet]
+verify_jwt = false
+
+[functions.publish-bouquet]
+verify_jwt = false
+
+[functions.validate-token]
+verify_jwt = false
+
+[functions.atelier-vote]
+verify_jwt = false
