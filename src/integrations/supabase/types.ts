@@ -14,10 +14,238 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bouquet_items: {
+        Row: {
+          bouquet_id: string
+          created_at: string
+          flower_type: string
+          id: string
+          opacity: number
+          rotation: number
+          scale: number
+          stem_length: number | null
+          updated_at: string
+          x: number
+          y: number
+          z_index: number
+        }
+        Insert: {
+          bouquet_id: string
+          created_at?: string
+          flower_type: string
+          id?: string
+          opacity?: number
+          rotation?: number
+          scale?: number
+          stem_length?: number | null
+          updated_at?: string
+          x: number
+          y: number
+          z_index?: number
+        }
+        Update: {
+          bouquet_id?: string
+          created_at?: string
+          flower_type?: string
+          id?: string
+          opacity?: number
+          rotation?: number
+          scale?: number
+          stem_length?: number | null
+          updated_at?: string
+          x?: number
+          y?: number
+          z_index?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bouquet_items_bouquet_id_fkey"
+            columns: ["bouquet_id"]
+            isOneToOne: false
+            referencedRelation: "bouquets"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bouquet_items_bouquet_id_fkey"
+            columns: ["bouquet_id"]
+            isOneToOne: false
+            referencedRelation: "bouquets_public"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      bouquets: {
+        Row: {
+          created_at: string
+          edit_token_hash: string
+          id: string
+          is_published: boolean
+          pot_style: string | null
+          published_at: string | null
+          title: string
+          unlock_time: string | null
+          updated_at: string
+          view_count: number
+          view_mode: string
+        }
+        Insert: {
+          created_at?: string
+          edit_token_hash: string
+          id?: string
+          is_published?: boolean
+          pot_style?: string | null
+          published_at?: string | null
+          title?: string
+          unlock_time?: string | null
+          updated_at?: string
+          view_count?: number
+          view_mode?: string
+        }
+        Update: {
+          created_at?: string
+          edit_token_hash?: string
+          id?: string
+          is_published?: boolean
+          pot_style?: string | null
+          published_at?: string | null
+          title?: string
+          unlock_time?: string | null
+          updated_at?: string
+          view_count?: number
+          view_mode?: string
+        }
+        Relationships: []
+      }
+      messages: {
+        Row: {
+          created_at: string
+          id: string
+          is_hidden: boolean
+          item_id: string
+          message_text: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_hidden?: boolean
+          item_id: string
+          message_text: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_hidden?: boolean
+          item_id?: string
+          message_text?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messages_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: true
+            referencedRelation: "bouquet_items"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      premium_votes: {
+        Row: {
+          created_at: string
+          id: string
+          ip_hash: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          ip_hash: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          ip_hash?: string
+        }
+        Relationships: []
+      }
+      views: {
+        Row: {
+          bouquet_id: string
+          id: string
+          ip_hash: string
+          viewed_at: string
+        }
+        Insert: {
+          bouquet_id: string
+          id?: string
+          ip_hash: string
+          viewed_at?: string
+        }
+        Update: {
+          bouquet_id?: string
+          id?: string
+          ip_hash?: string
+          viewed_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "views_bouquet_id_fkey"
+            columns: ["bouquet_id"]
+            isOneToOne: false
+            referencedRelation: "bouquets"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "views_bouquet_id_fkey"
+            columns: ["bouquet_id"]
+            isOneToOne: false
+            referencedRelation: "bouquets_public"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
-      [_ in never]: never
+      bouquets_public: {
+        Row: {
+          created_at: string | null
+          id: string | null
+          is_published: boolean | null
+          pot_style: string | null
+          published_at: string | null
+          title: string | null
+          unlock_time: string | null
+          updated_at: string | null
+          view_count: number | null
+          view_mode: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string | null
+          is_published?: boolean | null
+          pot_style?: string | null
+          published_at?: string | null
+          title?: string | null
+          unlock_time?: string | null
+          updated_at?: string | null
+          view_count?: number | null
+          view_mode?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string | null
+          is_published?: boolean | null
+          pot_style?: string | null
+          published_at?: string | null
+          title?: string | null
+          unlock_time?: string | null
+          updated_at?: string | null
+          view_count?: number | null
+          view_mode?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       [_ in never]: never
