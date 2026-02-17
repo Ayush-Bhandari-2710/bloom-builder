@@ -1,12 +1,14 @@
-import { Undo2, Redo2, ZoomIn, ZoomOut, Trash2, Flower2, MessageCircle, Send, Eye } from "lucide-react";
+import { Undo2, Redo2, ZoomIn, ZoomOut, Trash2, Flower2, MessageCircle, Send, Eye, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { BouquetItem } from "@/types";
 
 interface ToolBarProps {
   items: BouquetItem[];
+  onPublish?: () => void;
+  isPublishing?: boolean;
 }
 
-const ToolBar = ({ items }: ToolBarProps) => {
+const ToolBar = ({ items, onPublish, isPublishing }: ToolBarProps) => {
   const messagesCount = items.filter((i) => i.message).length;
 
   return (
@@ -43,8 +45,14 @@ const ToolBar = ({ items }: ToolBarProps) => {
         <Button variant="outline" size="sm" className="hidden sm:flex border-border text-muted-foreground hover:text-foreground gap-2">
           <Eye size={16} /> Preview
         </Button>
-        <Button size="sm" className="gradient-button border-0 text-primary-foreground shadow-pink hover:scale-[1.02] active:scale-[0.98] transition-transform gap-2">
-          <Send size={16} /> Publish
+        <Button
+          size="sm"
+          className="gradient-button border-0 text-primary-foreground shadow-pink hover:scale-[1.02] active:scale-[0.98] transition-transform gap-2"
+          onClick={onPublish}
+          disabled={isPublishing}
+        >
+          {isPublishing ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
+          {isPublishing ? "Publishing…" : "Publish"}
         </Button>
       </div>
     </div>
