@@ -1,6 +1,6 @@
 import Logo from "@/components/shared/Logo";
 import { Button } from "@/components/ui/button";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 import type { ViewMode } from "@/types";
 
 interface BuilderHeaderProps {
@@ -8,9 +8,11 @@ interface BuilderHeaderProps {
   setTitle: (t: string) => void;
   viewMode: ViewMode;
   setViewMode: (v: ViewMode) => void;
+  onPublish?: () => void;
+  isPublishing?: boolean;
 }
 
-const BuilderHeader = ({ title, setTitle, viewMode, setViewMode }: BuilderHeaderProps) => (
+const BuilderHeader = ({ title, setTitle, viewMode, setViewMode, onPublish, isPublishing }: BuilderHeaderProps) => (
   <header className="h-20 flex-shrink-0 glass shadow-soft flex items-center justify-between px-4 md:px-8 z-30 border-b border-border/30">
     <div className="flex items-center gap-4">
       <Logo />
@@ -55,8 +57,14 @@ const BuilderHeader = ({ title, setTitle, viewMode, setViewMode }: BuilderHeader
       <Button variant="outline" size="sm" className="hidden md:flex border-border text-muted-foreground hover:text-foreground">
         Preview
       </Button>
-      <Button size="sm" className="gradient-button border-0 text-primary-foreground shadow-pink hover:scale-[1.02] active:scale-[0.98] transition-transform">
-        Publish
+      <Button
+        size="sm"
+        className="gradient-button border-0 text-primary-foreground shadow-pink hover:scale-[1.02] active:scale-[0.98] transition-transform"
+        onClick={onPublish}
+        disabled={isPublishing}
+      >
+        {isPublishing ? <Loader2 size={16} className="animate-spin" /> : null}
+        {isPublishing ? "Publishing…" : "Publish"}
       </Button>
     </div>
   </header>
